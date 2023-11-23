@@ -89,7 +89,7 @@ def gen_Noise(data: np.array, mode: NoiseMode):
     if mode == NoiseMode.high:
         d = 8 * 1e-1
     if mode == NoiseMode.random:
-        d = 2 * 1e-1 + (random.random() - 0.5) * 3 * 1e-1
+        d = 3 * 1e-1 + (random.random() - 0.5) * 3 * 1e-1
 
     return noise_data * data_noise_cof * d
 
