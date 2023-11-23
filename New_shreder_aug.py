@@ -14,10 +14,13 @@ import seaborn as sns
 
 
 # Showing map with Bresenham Line plot
-def show_Map_with_Line(c_map, line):
+def show_Map_with_Line(c_map, line=None):
+    if line is None:
+        line = [[0, 0], [0, 0]]
+
     sns.set()
     fig, ax = plt.subplots(1, 2, figsize=(10, 5), dpi=80)
-    sns.heatmap(ax=ax[0], data=c_map)
+    sns.heatmap(data=c_map)
     ax[0].plot(line[1], line[0], color="white", linewidth=2)
     sns.lineplot(ax=ax[1], data=bresenham_line(c_map, line[0][0], line[1][0], line[0][1], line[1][1]))
     plt.show()
@@ -78,7 +81,7 @@ def gen_Noise(data: np.array, mode: NoiseMode):
     if mode == NoiseMode.mix:
         n_segment = random.randint(5, len(data) // 5)
         for i_segment in range(n_segment):
-            d_ = random.randrange(2, 16) / 2 * 1e-1 + (random.random() - 0.5) * 3 * 1e-1
+            d_ = abs(random.randrange(2, 19) / 2 * 1e-1 + (random.random() - 0.5) * 3 * 1e-1)
             noise_data[
             i_segment * len(data) // n_segment:(i_segment + 1) * len(data) // n_segment] *= d_ * data_noise_cof
         return noise_data
